@@ -72,18 +72,14 @@ namespace Ixian_DLT_GUI
                     HttpResponseMessage response = await webewq.GetAsync(URL);
                     response.EnsureSuccessStatusCode();
                     json = await response.Content.ReadAsStringAsync();
-
                 }
                 catch (SocketException ex) {
                     MessageBox.Show( ex.ToString());
                 }
                 finally { webewq.Dispose(); }
-                
-                
             }
             finally
             {
-
             }
             return json;
         }
@@ -138,7 +134,6 @@ namespace Ixian_DLT_GUI
             }
             finally
             {
-
             }
         }
     }

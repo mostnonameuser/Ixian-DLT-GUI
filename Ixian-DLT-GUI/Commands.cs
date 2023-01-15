@@ -38,14 +38,12 @@ namespace Ixian_DLT_GUI
                 RedirectStandardError = false,
                 RedirectStandardInput = false,
                 CreateNoWindow = hideWindow,
-               // WindowStyle = ProcessWindowStyle.Hidden,
             };
             return startInfo;
         }
         public static string[] PutCliParams(string addon)
         {
             List<string> list = new List<string>();
-            //string[] cmdparamsPar = new string[] { };
             if (Properties.Settings.Default.wallet != "")
             {
                 list.Add("-w " + Properties.Settings.Default.wallet);
@@ -143,7 +141,6 @@ namespace Ixian_DLT_GUI
             using var process = Process.Start(start);
             using var reader = process.StandardOutput;
             process.EnableRaisingEvents = true;
-            //string answer = await reader.ReadToEndAsync();
             bool status;
             if (await reader.ReadToEndAsync() != "")
             {
@@ -168,7 +165,6 @@ namespace Ixian_DLT_GUI
             using var process = Process.Start(start);
             using var reader = process.StandardOutput;
             process.EnableRaisingEvents = true;
-            //string answer = await reader.ReadToEndAsync();
             bool status;
             if (await reader.ReadToEndAsync() != "")
             {
