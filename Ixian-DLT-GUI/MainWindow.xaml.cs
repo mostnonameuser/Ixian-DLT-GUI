@@ -294,7 +294,6 @@ namespace Ixian_DLT_GUI
             aMon = false;
             active = false;
             Environment.Exit(0);
-            //  MessageBox.Show("WPF на METANIT.COM");
         }
         public void hyperlink_Click(object sender, RoutedEventArgs e)
         {

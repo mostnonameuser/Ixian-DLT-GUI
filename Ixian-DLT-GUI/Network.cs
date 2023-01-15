@@ -58,11 +58,6 @@ namespace Ixian_DLT_GUI
             {
 
             }
-            /* if (response != null)
-            {
-                MessageBox.Show("Node stopped");
-            }
-           */
             client.Dispose();
         }
         public static async Task<string> statusDLT()
@@ -72,8 +67,6 @@ namespace Ixian_DLT_GUI
             try
             {
                 HttpClient webewq = new HttpClient();
-                //webewq.BaseAddress = new Uri(url);
-                // webewq.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
                 try
                 {
                     HttpResponseMessage response = await webewq.GetAsync(URL);
@@ -101,24 +94,17 @@ namespace Ixian_DLT_GUI
             try
             {
                 HttpClient webewq = new HttpClient();
-                //webewq.BaseAddress = new Uri(url);
-                // webewq.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
-
-               
                 try
                 { 
                     HttpResponseMessage response = await webewq.GetAsync(URL );
                     response.EnsureSuccessStatusCode();
                     json = await response.Content.ReadAsStringAsync();
-
                 }
                 catch (WebException ex)
                 {
                     MessageBox.Show(ex.ToString());
                 }
                 finally { webewq.Dispose(); }
-
-
             }
             catch (WebException ex)
             {
@@ -149,8 +135,6 @@ namespace Ixian_DLT_GUI
                     MessageBox.Show(ex.ToString());
                 }
                 finally { webewq.Dispose(); }
-
-
             }
             finally
             {

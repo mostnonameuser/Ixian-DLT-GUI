@@ -74,12 +74,10 @@ namespace Ixian_DLT_GUI
             }
 
             string[] cmdparamsPar = list.ToArray();
-           // MessageBox.Show(string.Join(" ",cmdparamsPar));
             return cmdparamsPar;
         }
         public static string makeConfig()
         {
-            //File.WriteAllText(@path, originalText);
             string config = "";
             if (!Properties.Settings.Default.webstart)
             {
