@@ -9,3 +9,5 @@ Use external blockchain directory  - select directory with '\data\...' (or '\dat
 If no external wallet file selected - it will be created in main (DLT) directory. DON'T forget to BACKUP is after first start and keep it in other place.
 
 Software detects your LOCAL IP and PUBLIC IP automatically, so just check if it is right. 
+
+Allowed API IPs must be splitted with space... "1.1.1.1 2.2.2.2" etc
