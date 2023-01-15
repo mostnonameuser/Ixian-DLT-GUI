@@ -1,0 +1,82 @@
+﻿<Window x:Class="Ixian_DLT_GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ixian_DLT_GUI"
+        mc:Ignorable="d"
+       Title="Ixian-DLT" Height="200" MinWidth="640" MaxWidth="640" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" >
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" x:Name="status" Content="DLT Status: Offline" x:FieldModifier="public"/>
+            <ProgressBar Name="syncProgrBar" Grid.Row="1" Visibility="Visible" Minimum="0" Maximum="100" Value="0" Height="5" />
+            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33*"></RowDefinition>
+                    <RowDefinition Height="33*"></RowDefinition>
+                    <RowDefinition Height="33*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="15*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"  Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="DLT Web Page"/>
+                <Label Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13"   >
+                    <Hyperlink Click="hyperlink_Click" x:Name="HapiLink" >
+                        <TextBlock x:Name="apiLink" Text="n/a"/> 
+                    </Hyperlink>
+                </Label>
+                <Label Grid.Row="1"  Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="Connections( In / Out )"/>
+                <Label Grid.Row="1"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="n/a" x:Name="connections"/>
+                <Label Grid.Row="2"  Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="Balance"/>
+                <Label Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="n/a" x:Name="balance"/>
+                <Label Grid.Row="0"  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="Block Difference"/>
+                <Label Grid.Row="0"  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="n/a" x:Name="blockdif" ToolTipService.Placement="Mouse" ToolTip="Current block "/>
+                <Label Grid.Row="1"  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="Signer POW"/>
+                <Label Grid.Row="1"  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="n/a" x:Name="spow"/>
+                <Label Grid.Row="2"  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="Total Presences"/>
+                <Label Grid.Row="2"  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13" Content="n/a" x:Name="presences"/>
+            </Grid>
+          
+        </Grid>
+        <Expander Grid.Row="2" Grid.ColumnSpan="4" Header="DLT Log" ToolTipService.Placement="Mouse" x:Name="LogExp" ToolTip="Show current DLT log" Expanded="Expander_Expanded" Collapsed="Expander_Collapsed" IsExpanded="False">
+            <Grid ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15*"></RowDefinition>
+                    <RowDefinition Height="80*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="1"  Grid.ColumnSpan="2" x:FieldModifier="public" x:Name="ConsText" Text="DLT off" FontSize="13"  Margin="10,0,10,0" />
+            </Grid>
+        </Expander>
+        <CheckBox Grid.Column="1" Grid.Row="1" Visibility="Visible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="ifConsole" IsThreeState="False" IsChecked="False" Content="Show DLT Console" Width="130" Checked="Console_CheckedChanged" Unchecked="Console_CheckedChanged"/>
+        <Button Grid.Column="0" Grid.Row="1" Name="startBtn"   Content="Start" FontSize="13" Height="30"
+                Click="Start_Click" Visibility="Visible" Margin="10,5,10,5" />
+        <Button Grid.Column="0" Grid.Row="1" Name="stopBtn" Content="Stop" FontSize="13"  Height="30"
+                Click="Stop_Click" Visibility="Hidden" Grid.ColumnSpan="2" Margin="10,5,10,5" />
+        <Button Grid.Column="2" Grid.Row="1" Name="repBtn" Content="SaveLog" FontSize="13"  Height="30"
+                Click="Report_Click" Visibility="Hidden" Margin="30,5,30,5"  />
+        <Button Grid.Column="2" Grid.Row="1" Name="setBtn" Content="Settings" FontSize="13" Height="30"
+                Click="Settings_Click"  Visibility="Visible" Margin="0,5,0,5" HorizontalAlignment="Center" Width="100"/>
+        <Button Grid.Column="3" Grid.Row="1" Name="exitBtn" Content="Exit" FontSize="13" Height="30"
+                Click="Exit_Click"  Visibility="Visible" Margin="10,5,10,5" />
+    </Grid>
+</Window>
