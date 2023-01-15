@@ -262,8 +262,6 @@ namespace Ixian_DLT_GUI
             Properties.Settings.Default.apiPasswd = apiPass.Password;
             Properties.Settings.Default.botApi = botApi.Text;
             Properties.Settings.Default.chatID = chatID.Text;
-           
-
             Properties.Settings.Default.Save();
             System.Windows.MessageBox.Show("Settings saved");
         }

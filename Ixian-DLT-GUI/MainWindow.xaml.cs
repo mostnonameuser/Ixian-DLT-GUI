@@ -46,9 +46,9 @@ namespace Ixian_DLT_GUI
         public static bool active = false;
         public static bool aMon = false;
         public static bool hide = false;
-        private static Thread m = null;
-        private static Thread t = null;
-        private static Thread f = null;
+        private static Thread getlog = null;
+        private static Thread putlog = null;
+        private static Thread checkrun = null;
         private static Thread stat = null;
         public static string ConOut;
         public static string wallet;
@@ -129,8 +129,7 @@ namespace Ixian_DLT_GUI
                     if (LogExp.IsExpanded == true)
                     {
                         aMon = true;
-                        //    getlogStart();
-                        mStart();
+                        putlogStart();
                     }
                 }
                 else
@@ -145,12 +144,9 @@ namespace Ixian_DLT_GUI
                 if (LogExp.IsExpanded == true)
                 {
                     aMon = true;
-                    //  getlogStart();
-                    mStart();
+                    putlogStart();
                 }
             }
-
-
         }
         private async Task prepConfig()
         {
@@ -181,13 +177,12 @@ namespace Ixian_DLT_GUI
                 LogExp.IsExpanded = true;
                 aMon = true;
                 getlogStart();
-                mStart();
+                putlogStart();
             }
             else
             {
                 Dispatcher.Invoke(() => ConsText.Text = "");
             }
-
         }
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
         {
@@ -234,7 +229,7 @@ namespace Ixian_DLT_GUI
             {
                 aMon = false;
                 getlogStart();
-                mStart();
+                putlogStart();
             }
             ConsText.Text = "DLT off";
             Dispatcher.Invoke(() => apiLink.Text = "n/a");
@@ -305,8 +300,8 @@ namespace Ixian_DLT_GUI
         //threads
         private void getlogStart()
         {
-            t = new Thread(getlogStartProcess);
-            t.Start();
+            getlog = new Thread(getlogStartProcess);
+            getlog.Start();
         }
         private static void getlogStartProcess()
         {
@@ -327,10 +322,10 @@ namespace Ixian_DLT_GUI
                 Thread.Sleep(200);
             }
         }
-        private void mStart()
+        private void putlogStart()
         {
-            m = new Thread(MonProc);
-            m.Start();
+            putlog = new Thread(MonProc);
+            putlog.Start();
         }
         private void MonProc()
         {
@@ -351,8 +346,8 @@ namespace Ixian_DLT_GUI
         }
         private async Task checkIfActive()
         {
-            f = new Thread(failureCheck);
-            f.Start();
+            checkrun = new Thread(failureCheck);
+            checkrun.Start();
         }
         private static async void failureCheck()
         {
@@ -364,13 +359,12 @@ namespace Ixian_DLT_GUI
         }
         private void checkStatus()
         {
-            m = new Thread(statusProc);
-            m.Start();
+            stat = new Thread(statusProc);
+            stat.Start();
         }
         private async void statusProc()
         {
             Thread.Sleep(1000);
-            //TextBox textBox = (TextBox)status;
             while (active)
             {
                 try
@@ -415,8 +409,6 @@ namespace Ixian_DLT_GUI
                         }
                     }
                 }
-                
-              
                 Thread.Sleep(10000);
             }
         }
