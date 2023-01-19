@@ -72,7 +72,18 @@ namespace Ixian_DLT_GUI
             string[] par = new string[] { "--version" };
             if (System.IO.File.Exists(@path + "\\IxianDLT.exe"))
             {
-                var process = Process.Start(Commands.GetParamsDlt(par, true));
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = @Properties.Settings.Default.dltDir + "\\IxianDLT.exe",  // Путь к приложению
+                    WorkingDirectory = @Properties.Settings.Default.dltDir,
+                    UseShellExecute = false,
+                    Arguments = string.Join(" ", par),
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    RedirectStandardInput = true,
+                    CreateNoWindow = true,
+                };
+                var process = Process.Start(startInfo);
                 var output = process.StandardOutput.ReadLine();
                 version = output.Split(new char[] { ' ' })[2].Split(new char[] { '-' })[1];
             }
@@ -238,6 +249,10 @@ namespace Ixian_DLT_GUI
                     {
                         CLeanDir(dltPath, "DLT-node");
                         UpdateDLT(answer[0].assets[0].browserDownloadUrl, dltPath, fullDltPath);
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("Node version is actual");
                     }
                 }
             }

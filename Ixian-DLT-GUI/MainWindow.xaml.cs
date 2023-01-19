@@ -82,8 +82,9 @@ namespace Ixian_DLT_GUI
                     hide = true;
                 }
                 active = await Commands.psCom();
-                _ = checkIfActive();
+                
                 _ = startNode("");
+                _ = checkIfActive();
                 checkStatus();
             }
         }
@@ -371,21 +372,7 @@ namespace Ixian_DLT_GUI
                 {
                     dltBal = JsonConvert.DeserializeObject<Balance>(await network.balanceDLT());
                     dltStat = JsonConvert.DeserializeObject<Status>(await network.statusDLT());
-                }
-                catch
-                {
-                    Dispatcher.Invoke(() => apiLink.Text = "n/a");
-                    Dispatcher.Invoke(() => connections.Content = "n/a");
-                    Dispatcher.Invoke(() => blockdif.Content = "n/a");
-                    Dispatcher.Invoke(() => blockdif.ToolTip = "n/a");
-                    Dispatcher.Invoke(() => syncProgrBar.Value = (double)0);
-                    Dispatcher.Invoke(() => balance.Content = "n/a");
-                    Dispatcher.Invoke(() => spow.Content = "n/a");
-                    Dispatcher.Invoke(() => presences.Content = "n/a");
-                }
-                finally
-                {
-                    if ( dltStat.result.update == "" )
+                    if (dltStat.result.update == "")
                     {
                         Dispatcher.Invoke(() => status.Content = "DLT " + dltStat.result.nodeVer + " Status: " + dltStat.result.status);
                     }
@@ -408,6 +395,22 @@ namespace Ixian_DLT_GUI
                             noBlockReaction();
                         }
                     }
+                }
+                catch
+                {
+                    Dispatcher.Invoke(() => apiLink.Text = "n/a");
+                    Dispatcher.Invoke(() => connections.Content = "n/a");
+                    Dispatcher.Invoke(() => blockdif.Content = "n/a");
+                    Dispatcher.Invoke(() => blockdif.ToolTip = "n/a");
+                    Dispatcher.Invoke(() => syncProgrBar.Value = (double)0);
+                    Dispatcher.Invoke(() => balance.Content = "n/a");
+                    Dispatcher.Invoke(() => spow.Content = "n/a");
+                    Dispatcher.Invoke(() => presences.Content = "n/a");
+                }
+                finally
+                {
+                   
+                   
                 }
                 Thread.Sleep(10000);
             }
